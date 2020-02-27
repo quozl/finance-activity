@@ -15,7 +15,7 @@ def evaluate(value):
     try:
         result = locale.atof(value)
         return result
-    except:
+    except ValueError:
         pass
 
     if isinstance(value, str):
@@ -33,7 +33,7 @@ def evaluate(value):
 
         try:
             node = ast.parse(value, mode='eval')
-        except:
+        except SyntaxError:
             return None
 
         def _eval(node):
@@ -103,4 +103,3 @@ if __name__ == "__main__":
             print('fail; %r -> %r instead of %r' % (text, observed, expected))
         else:
             print('pass; %r -> %r' % (text, observed))
-
